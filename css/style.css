@@ -1,0 +1,72 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-image: linear-gradient(to bottom, green, yellow);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100%
+}
+
+.loginForm {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    padding-top: 10%
+}
+
+.loginText {
+    font-size: 2.5vw;
+}
+
+@media only screen and (max-width: 575px) {
+    .loginImg {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+.loginBtn {
+    float: right;
+}
+
+.loginRegTxt {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.loginRegTxt a {
+    all: unset
+}
+
+.loginRegTxt a:hover {
+    all: unset
+}
+
+.loginRegTxt:hover {
+    cursor: pointer;
+}
+
+.toast-error {
+    background-color: red !important
+}
+
+.toast-warning {
+    background-color: gold !important
+}
+
+.toast-success {
+    background-color: green !important
+}
+
+.regText {
+    font-size: 3vw;
+}
+
+@media only screen and (max-width: 575px) {
+    .regText {
+        font-size: 15px;
+    }
+}

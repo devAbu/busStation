@@ -21,7 +21,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.indexOf('sentAdmin') > -1) {
                         toastr.success('Admin successfully logged in.');
-                        window.location.replace("admin.html")
+                        window.location.replace("admin.php")
                     } else if (data.indexOf('sentUser') > -1) {
                         toastr.success('User successfully logged in.');
                         window.location.replace("user.html")

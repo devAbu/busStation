@@ -17,7 +17,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.indexOf('changed') > -1) {
                         toastr.success('Password changed successfully');
-                        /*                         window.location.replace("admin.php") */
+                        window.location.replace("index.html")
                     } else {
                         toastr.error("There are a problem, please try later.");
                     }

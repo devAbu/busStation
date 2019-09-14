@@ -24,9 +24,13 @@ if ($_REQUEST['task'] == "login") {
                         echo ('pass');
                     }
                 } else {
-                    echo ('sentUser');
-                    session_start();
-                    $_SESSION["email"] = $row["email"];
+                    if (password_verify($password, $row['password'])) {
+                        echo ('sentUser');
+                        session_start();
+                        $_SESSION["email"] = $row["email"];
+                    } else {
+                        echo ('pass');
+                    }
                 }
             } else {
                 echo ('mail');

@@ -35,6 +35,9 @@ session_start();
                 <li class="nav-item">
                     <span style="color: #0066ff"><?php echo $_SESSION["email"]; ?></span>
                 </li>
+                <li class="nav-item mx-2">
+                    <a href="#" data-toggle="modal" data-target="#changePass"><i class="fas fa-users-cog"></i></a>
+                </li>
             </ul>
 
             <a href="logout.php">
@@ -42,6 +45,31 @@ session_start();
             </a>
         </div>
     </nav>
+
+    <div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="newPass">Enter a new password</label>
+                    <input type="password" id="newPass" name="newPass" class="form-control">
+                    <label for="confirmedPass">Re-enter your new password</label>
+                    <input type="password" name="confirmedPass" id="confirmedPass" class="form-control">
+
+                    <input type="text" id="sessionEmail" hidden value="<?php echo $_SESSION['email'] ?>">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="newPassBtn">Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section>
         <div class="container">
@@ -71,7 +99,7 @@ session_start();
                 echo '<div class="col-12">';
                 while ($row = $result->fetch_assoc()) {
                     echo ' <div class="startEnd">
-                        <form method="post" action="" >
+                        <form method="post" action="reservation/reserve.php" >
                             <div class="card mt-2 bus">
                                 <input type="text" value=" ' . $row["ID"] . ' "  name="busID" id="busID" hidden>
                                 <h5 class="card-header all">' . $row['busType'] . '</h5>
@@ -81,6 +109,7 @@ session_start();
                                             <li class="start">Start destination: ' . $row['startDestination'] . '</li>
                                             <li class="end">End destination: ' . $row['endDestination'] . '</li>
                                             <li class="all">Driving route: ' . $row['route'] . '</li>
+                                            <li class="all">Available Seats: ' . $row['availableSeat'] . '</li>
                                             <li class="all">Price ticket: ' . $row['price'] . '</li>
                                         </ul>
                                         <button class="btn btn-success all" id="reservation" type="submit">Buy ticket</button>
@@ -106,6 +135,9 @@ session_start();
     </script>
 
     <script src="toastr.js"></script>
+    <script src="changePass/changePass.js"></script>
+
+    <!-- TODO: uradit da trazi samo po start i end destination -->
 
     <!-- <script>
         $("#search-start").on("keyup", function() {

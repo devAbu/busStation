@@ -112,7 +112,7 @@ session_start();
                                             <li class="all">Available Seats: ' . $row['availableSeat'] . '</li>
                                             <li class="all">Price ticket: ' . $row['price'] . '</li>
                                         </ul>
-                                        <button class="btn btn-success all" id="reservation" type="submit">Buy ticket</button>
+                                        <button class="btn btn-success all" id="reservation" type="submit">Reserve seat</button>
                                 </div>
                             </div>
                         </form>

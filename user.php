@@ -106,8 +106,8 @@ session_start();
                                 <div class="card-body">
                                     <h5 class="card-title all">' . $row['company'] . '</h5>
                                         <ul>
-                                            <li class="start">Start destination: ' . $row['startDestination'] . '</li>
-                                            <li class="end">End destination: ' . $row['endDestination'] . '</li>
+                                            <li class="start all" role="treeitem" data-value="' . $row['startDestination'] . '">Start destination: ' . $row['startDestination'] . '</li>
+                                            <li class="end all"  role="treeitem" data-value="' . $row['endDestination'] . '">End destination: ' . $row['endDestination'] . '</li>
                                             <li class="all">Driving route: ' . $row['route'] . '</li>
                                             <li class="all">Available Seats: ' . $row['availableSeat'] . '</li>
                                             <li class="all">Price ticket: ' . $row['price'] . '</li>
@@ -139,21 +139,23 @@ session_start();
 
     <!-- TODO: uradit da trazi samo po start i end destination -->
 
-    <!-- <script>
+    <script>
         $("#search-start").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $(".startEnd form").not($('#reservation')).filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            var start = $('.start').data('value')
+
+            $(".start").filter(function() {
+                $(".all").not(".start").toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
 
         $("#search-end").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $(".startEnd").not($(".all")).filter(function() {
+            $(".startEnd").not($(".all")).not($(".start")).filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
-    </script> -->
+    </script>
 
 </body>
 

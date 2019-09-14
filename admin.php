@@ -161,15 +161,59 @@ session_start();
                                             <li>Price ticket: ' . $row['price'] . '</li>
                                         </ul>
                                         <button class="btn btn-warning" id="remove" type="submit">Remove</button>
+                                        <button type="button" class=" btn btn-warning " data-toggle="collapse" data-target="#update' . $row["ID"] . '">Edit</button>
                                 </div>
-                            </div>';
+                            </div>
+                            </form>
+                            
+                            
+<div class="collapse mt-3" id="update' . $row["ID"] . '">
+                      <div class="card card-body">
+                         <div class="container">
+                             <div class="row">
+                             <input type="number" value="' . $row["ID"] . '" id="idUpdate" hidden>
+                                 <div class="col-12">
+                                     <label for="name">Start destination: </label>
+                                     <input type="text" class="form-control" id="startUpdate' . $row["ID"] . '" name="name" value="' . $row["startDestination"] . '">
+                                 </div>
+                                 <div class="col-12">
+                                     <label for="description">End destination: </label>
+                                     <input type="text" class="form-control" id="endUpdate' . $row["ID"] . '" name="description" value="' . $row["endDestination"] . '">
+                                 </div>
+                                 <div class="col-12">
+                                     <label for="link">Price: </label>
+                                     <input type="text" class="form-control" id="priceUpdate' . $row["ID"] . '" name="link" value="' . $row["price"] . '">
+                                 </div>
+                                 <div class="col-12">
+                                     <label for="link">Bus type: </label>
+                                     <input type="text" class="form-control" id="busTypeUpdate' . $row["ID"] . '" name="link" value="' . $row["busType"] . '">
+                                 </div>
+                                 <div class="col-12">
+                                     <label for="link">Company: </label>
+                                     <input type="text" class="form-control" id="companyUpdate' . $row["ID"] . '" name="link" value="' . $row["company"] . '">
+                                 </div>
+                                 <div class="col-12">
+                                     <label for="link">Driving route: </label>
+                                     <input type="text" class="form-control" id="routeUpdate' . $row["ID"] . '" name="link" value="' . $row["route"] . '">
+                                 </div>
+                                 <div class="col-12">
+                                     <label for="link">Maximum seat: </label>
+                                     <input type="text" class="form-control" id="maxUpdate' . $row["ID"] . '" name="link" value="' . $row["maxSeat"] . '">
+                                 </div>
+                                 <div class="col-12 mt-2">
+                                     <button class="btn btn-success " id="edit' . $row["ID"] . '" onclick="edit(this.id)">Edit</button>
+                                 </div>
+                             </div>
+                         </div>
+                      </div>
+                  </div>
+                            ';
                     }
                 } else {
                     echo "There are no buses.";
                 }
                 $dbc->close();
                 ?>
-                <!-- TODO: uradit edit bus -->
 
             </div>
         </div>
@@ -186,6 +230,65 @@ session_start();
     <script src="toastr.js"></script>
     <script src="js/newBus.js"></script>
     <script src="changePass/changePass.js"></script>
+
+    <script>
+        function edit(idClick) {
+            console.log(idClick)
+            var res = idClick.replace(/\D/g, "")
+            var start = $('#startUpdate' + res).val()
+            var end = $('#endUpdate' + res).val()
+            var price = $('#priceUpdate' + res).val()
+            var busType = $('#busTypeUpdate' + res).val()
+            var company = $('#companyUpdate' + res).val()
+            var route = $('#routeUpdate' + res).val()
+            var maxSeat = $('#maxUpdate' + res).val()
+
+
+
+            console.log(res)
+
+
+
+
+            if (start == "") {
+                toastr.error("Enter start destination");
+            } else if (end == '') {
+                toastr.error("Enter end destination")
+            } else if (price == "") {
+                toastr.error("Enter ticket's price")
+            } else if (busType == "") {
+                toastr.error("Enter bus type")
+            } else if (company == "") {
+                toastr.error("Enter the company")
+            } else if (route == "") {
+                toastr.error("Enter the driving route")
+            } else if (maxSeat == "") {
+                toastr.error("Enter number of seat")
+            } else {
+                $.ajax({
+                    url: "update.php?start=" + start + "&end=" + end + "&price=" + price + "&ID=" + res + "&busType=" + busType + "&company=" + company + "&route=" + route + "&maxSeat=" + maxSeat,
+
+                    success: function(data) {
+                        if (data.indexOf('changed') > -1) {
+                            toastr.success("Successfully updated!")
+                            $('#startUpdate' + res).val("")
+                            $('#endUpdate' + res).val("")
+                            $('#priceUpdate' + res).val("")
+                            $('#busTypeUpdate' + res).val("")
+                            $('#companyUpdate' + res).val("")
+                            $('#routeUpdate' + res).val("")
+                            $('#maxUpdate' + res).val("")
+                        } else {
+                            toastr.error("Try later.")
+                        }
+                    },
+                    error: function(data, err) {
+                        toastr.error("Some problem occured. Please try again later.")
+                    }
+                })
+            }
+        }
+    </script>
 
 </body>
 

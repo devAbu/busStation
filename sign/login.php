@@ -25,6 +25,8 @@ if ($_REQUEST['task'] == "login") {
                     }
                 } else {
                     echo ('sentUser');
+                    session_start();
+                    $_SESSION["email"] = $row["email"];
                 }
             } else {
                 echo ('mail');

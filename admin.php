@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,10 +24,100 @@
 </head>
 
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 50px">
+        <a class="navbar-brand" href="admin.php">Bus station</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <span style="color: #0066ff"><?php echo $_SESSION["email"]; ?></span>
+                </li>
+                <li class="nav-item mx-2">
+                    <a href="#" data-toggle="modal" data-target="#changePass"><i class="fas fa-users-cog"></i></a>
+                </li>
+            </ul>
+
+            <a href="logout.php">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Logout</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="newPass">Enter a new password</label>
+                    <input type="password" id="newPass" name="newPass" class="form-control">
+                    <label for="confirmedPass">Re-enter your new password</label>
+                    <input type="password" name="confirmedPass" id="confirmedPass" class="form-control">
+
+                    <input type="text" id="sessionEmail" hidden value="<?php echo $_SESSION['email'] ?>">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="newPassBtn">Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-4 offset-2">
+                    <?php
+                    require 'connection/connect.php';
+
+                    $sql = "SELECT * FROM bus";
+                    $result = $dbc->query($sql);
+
+                    $count = $result->num_rows;
+
+                    echo '<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+  <div class="card-header text-center">No. of buses</div>
+  <div class="card-body">
+    <h5 class="card-title text-center">' . $count . '</h5>
+  </div>
+</div>';
+
+                    ?>
+                </div>
+                <div class="col-6">
+                    <?php
+
+                    $sql = "SELECT * FROM register";
+                    $result = $dbc->query($sql);
+
+                    $count = $result->num_rows;
+
+                    echo '<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+  <div class="card-header text-center">No. of users</div>
+  <div class="card-body">
+    <h5 class="card-title text-center">' . $count . '</h5>
+  </div>
+</div>';
+
+                    ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <button class="btn btn-outline-primary" id="addBtn" data-toggle="collapse" data-target="#form">Add new
+                <button class="btn btn-primary" id="addBtn" data-toggle="collapse" data-target="#form">Add new
                     bus <i class="fas fa-plus-circle ml-2"></i></button>
             </div>
             <div class="col-12">
@@ -46,8 +139,6 @@
 
                 <?php
 
-                require 'connection/connect.php';
-
                 $sql = "SELECT * FROM bus";
                 $result = $dbc->query($sql);
 
@@ -57,27 +148,28 @@
                     while ($row = $result->fetch_assoc()) {
                         echo '
                         <form method="post" action="delete/delete.php">
-                        <div class="card mt-2">
-                        <input type="text" value=" ' . $row["ID"] . ' "  name="busID" id="busID" >
-  <h5 class="card-header">' . $row['busType'] . '</h5>
-  <div class="card-body">
-    <h5 class="card-title">' . $row['company'] . '</h5>
-        <ul>
-            <li>Start destination: ' . $row['startDestination'] . '</li>
-            <li>End destination: ' . $row['endDestination'] . '</li>
-            <li>Driving route: ' . $row['route'] . '</li>
-            <li>Price ticket: ' . $row['price'] . '</li>
-        </ul>
-        <button class="btn btn-warning" id="remove" type="submit">Remove</button>
-</div>
-</div>';
+                            <div class="card mt-2">
+                                <input type="text" value=" ' . $row["ID"] . ' "  name="busID" id="busID" hidden>
+                                <h5 class="card-header">' . $row['busType'] . '</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">' . $row['company'] . '</h5>
+                                        <ul>
+                                            <li>Start destination: ' . $row['startDestination'] . '</li>
+                                            <li>End destination: ' . $row['endDestination'] . '</li>
+                                            <li>Driving route: ' . $row['route'] . '</li>
+                                            <li>Number of seats: ' . $row['maxSeat'] . '</li>
+                                            <li>Price ticket: ' . $row['price'] . '</li>
+                                        </ul>
+                                        <button class="btn btn-warning" id="remove" type="submit">Remove</button>
+                                </div>
+                            </div>';
                     }
                 } else {
-                    echo " 0 results";
+                    echo "There are no buses.";
                 }
                 $dbc->close();
                 ?>
-
+                <!-- TODO: uradit edit bus -->
 
             </div>
         </div>
@@ -93,6 +185,7 @@
 
     <script src="toastr.js"></script>
     <script src="js/newBus.js"></script>
+    <script src="changePass/changePass.js"></script>
 
 </body>
 

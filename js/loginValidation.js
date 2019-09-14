@@ -24,7 +24,7 @@ $(document).ready(function () {
                         window.location.replace("admin.php")
                     } else if (data.indexOf('sentUser') > -1) {
                         toastr.success('User successfully logged in.');
-                        window.location.replace("user.html")
+                        window.location.replace("user.php")
                     } else if (data.indexOf('pass') > -1) {
                         toastr.error('Password is incorrect');
                     } else if (data.indexOf('mail') > -1) {

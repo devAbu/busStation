@@ -25,7 +25,7 @@ session_start();
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 50px">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="admin.php">Bus station</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -46,6 +46,12 @@ session_start();
             </a>
         </div>
     </nav>
+
+    <section id="jumbotron" class="jumbotron jumbotron-fluid text-white d-flex justify-content-center align-items-center">
+        <div class="container text-center">
+            <h1 class="display-1 text-white text-uppercase">BUS STATION</h1>
+        </div>
+    </section>
 
     <div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -84,7 +90,7 @@ session_start();
 
                     $count = $result->num_rows;
 
-                    echo '<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                    echo '<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
   <div class="card-header text-center">No. of buses</div>
   <div class="card-body">
     <h5 class="card-title text-center">' . $count . '</h5>
@@ -130,6 +136,11 @@ session_start();
                         <input type="text" name="company" id="company" placeholder="Company" class="form-control my-2">
                         <input type="text" name="route" id="route" placeholder="Route" class="form-control mb-2">
 
+                        <input type="number" name="maxSeat" id="maxSeat" placeholder="No. of seats" class="form-control mb-2">  
+
+                        <input type="time" name="departureTime" id="departureTime" class="form-control mb-2">
+                        <input type="time" name="arrivalTime" id="arrivalTime" class="form-control mb-2">
+
                         <button type="button" class="btn btn-success" id="newAddBtn">Add</button>
                         <button type="reset" class="btn btn-danger" id="newCancelBtn">Clear</button>
                     </form>
@@ -159,8 +170,10 @@ session_start();
                                             <li>Driving route: ' . $row['route'] . '</li>
                                             <li>Number of seats: ' . $row['maxSeat'] . '</li>
                                             <li>Price ticket: ' . $row['price'] . '</li>
+                                            <li>Departure time: ' . date_format(date_create($row['departureTime']), "H:i") . '</li>
+                                            <li>Arrival time: ' .  date_format(date_create($row['arrivalTime']), "H:i") . '</li>
                                         </ul>
-                                        <button class="btn btn-warning" id="remove" type="submit">Remove</button>
+                                        <button class="btn btn-danger" id="remove" type="submit">Remove</button>
                                         <button type="button" class=" btn btn-warning " data-toggle="collapse" data-target="#update' . $row["ID"] . '">Edit</button>
                                 </div>
                             </div>

@@ -4,6 +4,7 @@ $(document).ready(function () {
         var regEmail = $("#email").val()
         var regFullName = $("#fullName").val()
         var regPass = $("#password").val()
+        var repeatPass = $('#repeatPass').val()
 
         function validateEmail($regEmail) {
             var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -18,6 +19,10 @@ $(document).ready(function () {
             toastr.error('Please enter your name')
         } else if (regPass == "") {
             toastr.error('Please enter your password')
+        } else if (repeatPass == "") {
+            toastr.error('Please re-enter your password')
+        } else if (regPass != repeatPass) {
+            toastr.warning('Passwords are not same')
         } else {
             $.ajax({
                 url: "sign/reg.php?task=register&email=" + regEmail + "&fullName=" + regFullName + "&password=" + regPass,
@@ -27,6 +32,7 @@ $(document).ready(function () {
                         $('#email').val("");
                         $('#fullName').val("");
                         $('#password').val("")
+                        $('#repeatPass').val("")
                     } else {
                         toastr.error('Email address already exists.');
                     }

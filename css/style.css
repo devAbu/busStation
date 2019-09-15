@@ -1,12 +1,13 @@
-html {
+.html {
     height: 100%;
 }
 
-body {
-    background-image: linear-gradient(to bottom, green, yellow);
+.jumbotron {
+    background-image: url('../images/bus1.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100%;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 .loginForm {

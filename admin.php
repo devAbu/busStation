@@ -81,7 +81,7 @@ session_start();
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-4 offset-2">
+                <div class="col-6 col-sm-6 col-lg-4 offset-lg-2 offset-0 offset-sm-0">
                     <?php
                     require 'connection/connect.php';
 
@@ -136,7 +136,7 @@ session_start();
                         <input type="text" name="company" id="company" placeholder="Company" class="form-control my-2">
                         <input type="text" name="route" id="route" placeholder="Route" class="form-control mb-2">
 
-                        <input type="number" name="maxSeat" id="maxSeat" placeholder="No. of seats" class="form-control mb-2">  
+                        <input type="number" name="maxSeat" id="maxSeat" placeholder="No. of seats" class="form-control mb-2">
 
                         <input type="time" name="departureTime" id="departureTime" class="form-control mb-2">
                         <input type="time" name="arrivalTime" id="arrivalTime" class="form-control mb-2">
@@ -295,7 +295,7 @@ session_start();
                 toastr.warning("Enter valid time")
             } else {
                 $.ajax({
-                    url: "update.php?start=" + start + "&end=" + end + "&price=" + price + "&ID=" + res + "&busType=" + busType + "&company=" + company + "&route=" + route + "&maxSeat=" + maxSeat + "&departureTime="+departureTime+ "&arrivalTime=" +arrivalTime,
+                    url: "update.php?start=" + start + "&end=" + end + "&price=" + price + "&ID=" + res + "&busType=" + busType + "&company=" + company + "&route=" + route + "&maxSeat=" + maxSeat + "&departureTime=" + departureTime + "&arrivalTime=" + arrivalTime,
 
                     success: function(data) {
                         if (data.indexOf('changed') > -1) {

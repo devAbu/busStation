@@ -73,19 +73,19 @@ session_start();
 
     <div class="container">
 
-    <form action="search.php" method="post">
-        <div class="container">
-        <div class="row">
-                <div class="col-3">
-                    <input id="search-start" name="searchStart" value="" type="text" class="form-control mt-2" placeholder="Search by start destination...">
+        <form action="search.php" method="post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-12">
+                        <input id="search-start" name="searchStart" value="" type="text" class="form-control mt-2" placeholder="Search by start destination...">
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-12">
+                        <input id="search-end" name="searchEnd" value="" type="text" class="form-control mt-2" placeholder="Search by end destination..">
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-12 mt-2 mt-sm-2 mt-md-0">
+                        <button class="btn btn-success all" type="submit">Search</button>
+                    </div>
                 </div>
-                <div class="col-3">
-                    <input id="search-end" name="searchEnd" value="" type="text" class="form-control mt-2" placeholder="Search by end destination..">
-                </div>
-                <div class="col-3">
-                <button class="btn btn-success all" type="submit">Search</button>
-                </div>
-            </div>
             </div>
         </form>
         <div class="row">
@@ -141,7 +141,7 @@ session_start();
     <script src="changePass/changePass.js"></script>
 
     <!-- TODO: uradit da trazi samo po start i end destination -->
-    
+
 
 </body>
 

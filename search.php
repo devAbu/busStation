@@ -73,19 +73,19 @@ session_start();
 
     <div class="container">
 
-    <form action="search.php" method="post">
-        <div class="container">
-        <div class="row">
-                <div class="col-3">
-                    <input id="search-start" name="searchStart" value="" type="text" class="form-control mt-2" placeholder="Search by start destination...">
+        <form action="search.php" method="post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-12">
+                        <input id="search-start" name="searchStart" value="" type="text" class="form-control mt-2" placeholder="Search by start destination...">
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-12">
+                        <input id="search-end" name="searchEnd" value="" type="text" class="form-control mt-2" placeholder="Search by end destination..">
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-12 mt-2 mt-sm-2 mt-md-0">
+                        <button class="btn btn-success all" type="submit">Search</button>
+                    </div>
                 </div>
-                <div class="col-3">
-                    <input id="search-end" name="searchEnd" value="" type="text" class="form-control mt-2" placeholder="Search by end destination..">
-                </div>
-                <div class="col-3">
-                <button class="btn btn-success all" type="submit">Search</button>
-                </div>
-            </div>
             </div>
         </form>
         <div class="row">
@@ -93,23 +93,23 @@ session_start();
 
 
 
-                        //search
-            $connection = mysqli_connect('localhost','root','','busStation');
-            $output='';
+            //search
+            $connection = mysqli_connect('localhost', 'root', '', 'busStation');
+            $output = '';
 
-                $searchStart= $_POST['searchStart'];
-                $searchEnd= $_POST['searchEnd'];
+            $searchStart = $_POST['searchStart'];
+            $searchEnd = $_POST['searchEnd'];
 
 
-                $query = mysqli_query($connection,"SELECT * FROM bus WHERE startDestination LIKE '%$searchStart%' AND endDestination LIKE '%$searchEnd%' ") or die("Could not search!");
-                $count = mysqli_num_rows($query);
+            $query = mysqli_query($connection, "SELECT * FROM bus WHERE startDestination LIKE '%$searchStart%' AND endDestination LIKE '%$searchEnd%' ") or die("Could not search!");
+            $count = mysqli_num_rows($query);
 
-                if($count == 0){
-                    echo "<br>There are no buses!";    }
-                else{
-                    while($result=mysqli_fetch_array($query)){
-                        echo '<div class="col-12">';
-                        echo ' <div class="startEnd">
+            if ($count == 0) {
+                echo "<br>There are no buses!";
+            } else {
+                while ($result = mysqli_fetch_array($query)) {
+                    echo '<div class="col-12">';
+                    echo ' <div class="startEnd">
                         <form method="post" action="reservation/reserve.php" >
                             <div class="card mt-2 bus">
                                 <input type="text" value=" ' . $result["ID"] . ' "  name="busID" id="busID" hidden>
@@ -117,7 +117,7 @@ session_start();
                                 <div class="card-body">
                                     <h5 class="card-title all">' . $result['company'] . '</h5>
                                         <ul>
-                                            <li class="start all" role="treeitem" data-value="' . $result['startDestination'] . '">Start destination: ' . $result   ['startDestination'] . '</li>
+                                            <li class="start all" role="treeitem" data-value="' . $result['startDestination'] . '">Start destination: ' . $result['startDestination'] . '</li>
                                             <li class="end all"  role="treeitem" data-value="' . $result['endDestination'] . '">End destination: ' . $result['endDestination'] . '</li>
                                             <li class="all">Driving route: ' . $result['route'] . '</li>
                                             <li class="all">Available Seats: ' . $result['availableSeat'] . '</li>
@@ -127,16 +127,15 @@ session_start();
                                 </div>
                             </div>
                         </form>
-                        
-                        
+                        </div>
+                        </div>
                         
                         ';
-
-                    }
                 }
+            }
 
 
-           ?>
+            ?>
         </div>
     </div>
 
@@ -151,7 +150,7 @@ session_start();
     <script src="changePass/changePass.js"></script>
 
     <!-- TODO: uradit da trazi samo po start i end destination -->
-    
+
 
 </body>
 

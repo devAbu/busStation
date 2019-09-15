@@ -10,6 +10,14 @@
     min-height: 100vh;
 }
 
+#jumbotron2 {
+    background-image: url('../images/bus3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
 .loginForm {
     background-image: url('../images/bus2.jpg');
     background-size: cover;

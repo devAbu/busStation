@@ -24,8 +24,8 @@ session_start();
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 50px">
-        <a class="navbar-brand" href="admin.php">Bus station</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="user.php">Bus station</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -70,6 +70,12 @@ session_start();
             </div>
         </div>
     </div>
+
+    <section id="jumbotron2" class="jumbotron jumbotron-fluid text-white d-flex justify-content-center align-items-center">
+        <div class="container text-center">
+            <h1 class="display-1 text-white text-uppercase">BUS STATION</h1>
+        </div>
+    </section>
 
     <div class="container">
 

@@ -213,6 +213,14 @@ session_start();
                                      <label for="link">Maximum seat: </label>
                                      <input type="text" class="form-control" id="maxUpdate' . $row["ID"] . '" name="link" value="' . $row["maxSeat"] . '">
                                  </div>
+                                 <div class="col-12">
+                                     <label for="link">Departure time: </label>
+                                     <input type="time" class="form-control" id="departureUpdate' . $row["ID"] . '" name="link" value="' . date_format(date_create($row['departureTime']), "H:i") . '">
+                                 </div>
+                                 <div class="col-12">
+                                     <label for="link">Arrival Time: </label>
+                                     <input type="time" class="form-control" id="arrivalUpdate' . $row["ID"] . '" name="link" value="' . date_format(date_create($row['arrivalTime']), "H:i") . '">
+                                 </div>
                                  <div class="col-12 mt-2">
                                      <button class="btn btn-success " id="edit' . $row["ID"] . '" onclick="edit(this.id)">Edit</button>
                                  </div>
@@ -255,6 +263,8 @@ session_start();
             var company = $('#companyUpdate' + res).val()
             var route = $('#routeUpdate' + res).val()
             var maxSeat = $('#maxUpdate' + res).val()
+            var departureTime = $('#departureUpdate' + res).val()
+            var arrivalTime = $('#arrivalUpdate' + res).val()
 
 
 
@@ -277,9 +287,15 @@ session_start();
                 toastr.error("Enter the driving route")
             } else if (maxSeat == "") {
                 toastr.error("Enter number of seat")
+            } else if (departureTime == "") {
+                toastr.error("Enter departure time.")
+            } else if (arrivalTime == "") {
+                toastr.error("Enter arrival time")
+            } else if (arrivalTime < departureTime) {
+                toastr.warning("Enter valid time")
             } else {
                 $.ajax({
-                    url: "update.php?start=" + start + "&end=" + end + "&price=" + price + "&ID=" + res + "&busType=" + busType + "&company=" + company + "&route=" + route + "&maxSeat=" + maxSeat,
+                    url: "update.php?start=" + start + "&end=" + end + "&price=" + price + "&ID=" + res + "&busType=" + busType + "&company=" + company + "&route=" + route + "&maxSeat=" + maxSeat + "&departureTime="+departureTime+ "&arrivalTime=" +arrivalTime,
 
                     success: function(data) {
                         if (data.indexOf('changed') > -1) {
@@ -291,6 +307,8 @@ session_start();
                             $('#companyUpdate' + res).val("")
                             $('#routeUpdate' + res).val("")
                             $('#maxUpdate' + res).val("")
+                            $('#departureUpdate' + res).val("")
+                            $('#arrivalUpdate' + res).val("")
                         } else {
                             toastr.error("Try later.")
                         }

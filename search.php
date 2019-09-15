@@ -25,7 +25,7 @@ session_start();
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 50px">
-        <a class="navbar-brand" href="user.php">Bus station</a>
+        <a class="navbar-brand" href="admin.php">Bus station</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -91,42 +91,52 @@ session_start();
         <div class="row">
             <?php
 
-            require 'connection/connect.php';
 
-            $sql = "SELECT * FROM bus";
-            $result = $dbc->query($sql);
 
-            $count = $result->num_rows;
+                        //search
+            $connection = mysqli_connect('localhost','root','','busStation');
+            $output='';
 
-            if ($count > 0) {
-                echo '<div class="col-12">';
-                while ($row = $result->fetch_assoc()) {
-                    echo ' <div class="startEnd">
+                $searchStart= $_POST['searchStart'];
+                $searchEnd= $_POST['searchEnd'];
+
+
+                $query = mysqli_query($connection,"SELECT * FROM bus WHERE startDestination LIKE '%$searchStart%' AND endDestination LIKE '%$searchEnd%' ") or die("Could not search!");
+                $count = mysqli_num_rows($query);
+
+                if($count == 0){
+                    echo "<br>There are no buses!";    }
+                else{
+                    while($result=mysqli_fetch_array($query)){
+                        echo '<div class="col-12">';
+                        echo ' <div class="startEnd">
                         <form method="post" action="reservation/reserve.php" >
                             <div class="card mt-2 bus">
-                                <input type="text" value=" ' . $row["ID"] . ' "  name="busID" id="busID" hidden>
-                                <h5 class="card-header all">' . $row['busType'] . '</h5>
+                                <input type="text" value=" ' . $result["ID"] . ' "  name="busID" id="busID" hidden>
+                                <h5 class="card-header all">' . $result['busType'] . '</h5>
                                 <div class="card-body">
-                                    <h5 class="card-title all">' . $row['company'] . '</h5>
+                                    <h5 class="card-title all">' . $result['company'] . '</h5>
                                         <ul>
-                                            <li class="start all" role="treeitem" data-value="' . $row['startDestination'] . '">Start destination: ' . $row['startDestination'] . '</li>
-                                            <li class="end all"  role="treeitem" data-value="' . $row['endDestination'] . '">End destination: ' . $row['endDestination'] . '</li>
-                                            <li class="all">Driving route: ' . $row['route'] . '</li>
-                                            <li class="all">Available Seats: ' . $row['availableSeat'] . '</li>
-                                            <li class="all">Price ticket: ' . $row['price'] . '</li>
+                                            <li class="start all" role="treeitem" data-value="' . $result['startDestination'] . '">Start destination: ' . $result   ['startDestination'] . '</li>
+                                            <li class="end all"  role="treeitem" data-value="' . $result['endDestination'] . '">End destination: ' . $result['endDestination'] . '</li>
+                                            <li class="all">Driving route: ' . $result['route'] . '</li>
+                                            <li class="all">Available Seats: ' . $result['availableSeat'] . '</li>
+                                            <li class="all">Price ticket: ' . $result['price'] . '</li>
                                         </ul>
                                         <button class="btn btn-success all" id="reservation" type="submit">Reserve seat</button>
                                 </div>
                             </div>
                         </form>
-                        </div>';
+                        
+                        
+                        
+                        ';
+
+                    }
                 }
-                echo '</div>';
-            } else {
-                echo "There are no buses.";
-            }
-            $dbc->close();
-            ?>
+
+
+           ?>
         </div>
     </div>
 

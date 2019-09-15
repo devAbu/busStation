@@ -24,19 +24,27 @@
 <body>
 
     <form class="loginForm">
-        <img src="images/logo.png" alt="LOGO" width="125" height="125" class="img-responsive mb-5 loginImg">
+        <img src="images/logo.png" alt="LOGO" width="125" height="125"
+            class="offset-md-4 offset-3 offset-sm-3 img-responsive mb-md-5 mb-2 mb-sm-2 loginImg">
         <span class="regText">Register!</span>
 
-        <input type="email" placeholder="Email..." id="email" name="email" class="form-control mb-3" autofocus>
-        <input type="text" placeholder="Full name..." id="fullName" name="fullName" class="form-control mb-3">
-        <input type="password" placeholder="Password..." id="password" name="password" class="form-control mb-3">
-        <input type="password" placeholder="Confirm password..." id="repeatPass" name="repeatPass" class="form-control mb-3">
+        <input type="email" placeholder="Email..." id="email" name="email" class="form-control mb-3 col-6 offset-3"
+            autofocus>
+        <input type="text" placeholder="Full name..." id="fullName" name="fullName"
+            class="form-control mb-3 col-6 offset-3">
+        <input type="password" placeholder="Password..." id="password" name="password"
+            class="form-control mb-3 col-6 offset-3">
+        <input type="password" placeholder="Confirm password..." id="repeatPass" name="repeatPass"
+            class="form-control mb-3 col-6 offset-3">
 
-        <span class="loginRegTxt"><a href="index.html">Login <i class="fas fa-sign-in-alt ml-1"></i></a></span>
+        <div class="col-6 offset-3">
+            <span class="loginRegTxt"><a href="index.html">Login <i class="fas fa-sign-in-alt ml-1"></i></a></span>
 
-        <button class="btn btn-secondary loginBtn" type="reset">Reset <i class="far fa-times-circle ml-1"></i></button>
-        <button class="btn btn-success loginBtn mx-2 mt-md-0 mt-2 mt-sm-2" type="button" id="submitBtn">Register <i
-                class="fas fa-user-plus ml-1"></i></button>
+            <button class="btn btn-secondary loginBtn" type="reset">Reset <i
+                    class="far fa-times-circle ml-1"></i></button>
+            <button class="btn btn-success loginBtn mx-0 mx-sm-0 mx-md-2 mt-md-0 mt-2 mt-sm-2" type="button"
+                id="submitBtn">Register <i class="fas fa-user-plus ml-1"></i></button>
+        </div>
     </form>
 
 

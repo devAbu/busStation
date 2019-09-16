@@ -17,8 +17,12 @@ $(document).ready(function () {
             toastr.warning('Please enter a valid email address')
         } else if (regFullName == "") {
             toastr.error('Please enter your name')
+        } else if (regFullName.length <= 3) {
+            toastr.error('Name should contains more than 3 characters')
         } else if (regPass == "") {
             toastr.error('Please enter your password')
+        } else if (regPass.length <= 5) {
+            toastr.error('Password should contains more than 5 characters')
         } else if (repeatPass == "") {
             toastr.error('Please re-enter your password')
         } else if (regPass != repeatPass) {

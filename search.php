@@ -71,9 +71,9 @@ session_start();
         </div>
     </div>
 
-    <section id="jumbotron2" class="jumbotron jumbotron-fluid text-white d-flex justify-content-center align-items-center">
+    <section class=" jumbotron-fluid text-white d-flex justify-content-center align-items-center">
         <div class="container text-center">
-            <h1 class="display-1 text-white text-uppercase">BUS STATION</h1>
+            <h1 class="display-1 text-dark text-uppercase mb-5">Your result:</h1>
         </div>
     </section>
 
@@ -128,6 +128,8 @@ session_start();
                                             <li class="all">Driving route: ' . $result['route'] . '</li>
                                             <li class="all">Available Seats: ' . $result['availableSeat'] . '</li>
                                             <li class="all">Price ticket: ' . $result['price'] . '</li>
+                                            <li class="all">Departure time: ' . $result['departureTime'] . '</li>
+                                            <li class="all">Arrival time: ' . $result['arrivalTime'] . '</li>
                                         </ul>
                                         <button class="btn btn-success all" id="reservation" type="submit">Reserve seat</button>
                                 </div>

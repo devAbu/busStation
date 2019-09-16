@@ -91,7 +91,7 @@ session_start();
                     $count = $result->num_rows;
 
                     echo '<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-  <div class="card-header text-center">No. of buses</div>
+  <div class="card-header text-center">No. of routes</div>
   <div class="card-body">
     <h5 class="card-title text-center">' . $count . '</h5>
   </div>
@@ -123,8 +123,7 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <button class="btn btn-primary" id="addBtn" data-toggle="collapse" data-target="#form">Add new
-                    bus <i class="fas fa-plus-circle ml-2"></i></button>
+                <button class="btn btn-primary" id="addBtn" data-toggle="collapse" data-target="#form">Add new route<i class="fas fa-plus-circle ml-2"></i></button>
             </div>
             <div class="col-12">
                 <div class="collapse" id="form">
@@ -222,7 +221,7 @@ session_start();
                                      <input type="time" class="form-control" id="arrivalUpdate' . $row["ID"] . '" name="link" value="' . date_format(date_create($row['arrivalTime']), "H:i") . '">
                                  </div>
                                  <div class="col-12 mt-2">
-                                     <button class="btn btn-success " id="edit' . $row["ID"] . '" onclick="edit(this.id)">Edit</button>
+                                     <button class="btn btn-success " id="edit' . $row["ID"] . '" onclick="edit(this.id)">Save</button>
                                  </div>
                              </div>
                          </div>

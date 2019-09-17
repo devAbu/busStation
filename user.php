@@ -110,6 +110,7 @@ session_start();
                     echo ' <div class="startEnd">
                         <form method="post" action="reservation/reserve.php" >
                             <div class="card mt-2 bus">
+                            <input type="text" value=" ' . $_SESSION["email"] . ' "  name="userID" id="userID" hidden>
                                 <input type="text" value=" ' . $row["ID"] . ' "  name="busID" id="busID" hidden>
                                 <h5 class="card-header all">' . $row['busType'] . '</h5>
                                 <div class="card-body">

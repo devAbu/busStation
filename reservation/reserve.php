@@ -4,6 +4,7 @@
 require "../connection/connect.php";
 
 $bus = $_REQUEST["busID"];
+$user = $_REQUEST["userID"];
 
 $sql = "Select maxSeat, availableSeat from bus where ID = $bus";
 $result = @mysqli_query($dbc, $sql);
@@ -17,7 +18,13 @@ if ($result->num_rows > 0) {
             $result2 = $dbc->query($query);
 
             if ($result2) {
-                header('location:../user.php');
+                $query2 = "INSERT INTO `reserved` (`user`, `busID`) values ('$user', '$bus')";
+                $result3 = $dbc->query($query2);
+                echo $user;
+                if ($result3) {
+                    //echo 'reserved';
+                    header('location:../user.php');
+                }
             }
         }
     }

@@ -116,11 +116,47 @@ session_start();
 
                     ?>
                 </div>
+                <div class="col-12">
+                    <h2>Reserved bus</h2>
+                    <table style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Bus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+                            $sql = "SELECT * from reserved";
+                            $result = $dbc->query($sql);
+
+                            if ($count > 0) {
+
+                                while ($row = $result->fetch_assoc()) {
+                                    echo '<tr>';
+
+                                    echo '<td>';
+                                    echo $row["user"];
+                                    echo '</td>';
+
+                                    echo '<td>';
+                                    echo $row["busID"];
+                                    echo '</td>';
+
+                                    echo '</tr>';
+                                }
+                            }
+                            ?>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
 
-    <div class="container">
+    <div class="container mt-3">
         <div class="row">
             <div class="col-12">
                 <button class="btn btn-primary" id="addBtn" data-toggle="collapse" data-target="#form">Add new route<i class="fas fa-plus-circle ml-2"></i></button>
